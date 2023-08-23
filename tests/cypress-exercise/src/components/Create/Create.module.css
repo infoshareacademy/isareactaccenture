@@ -1,0 +1,8 @@
+.todoForm {
+    display: flex;
+    justify-content: center;
+}
+
+.todoInput {
+    width: 50%;
+}
