@@ -20,7 +20,7 @@ export const Game = ({ name }) => {
         if (points >= 50) {
             alert(`Gratulacje wygrałeś w grę ${name}!`)
         }
-    })
+    }, [points, name])
 
     return <>
         <h1>Witaj w grzę {name}!</h1>
