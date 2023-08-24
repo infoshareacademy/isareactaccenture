@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
 const Score = styled.span`
@@ -15,6 +15,12 @@ export const Game = ({ name }) => {
     const decrease = () => {
         setPoints(points - 5);
     }
+
+    useEffect(() => {
+        if (points >= 50) {
+            alert(`Gratulacje wygrałeś w grę ${name}!`)
+        }
+    })
 
     return <>
         <h1>Witaj w grzę {name}!</h1>
