@@ -1,4 +1,5 @@
 import { Contact } from './Contact';
+import { MyFavouriteDishes } from './MyFavouriteDishes';
 import MyName from './MyName';
 import { Wrapper } from './Wrapper';
 
@@ -13,6 +14,13 @@ function App() {
                     address: { street: 'Słowackiego', city: 'Gdańsk', number: 37 },
                     email: 'moj@mail.com'
                 }
+            } />
+            <MyFavouriteDishes dishes={
+                [
+                    { id: 1, name: 'pierogi' },
+                    { id: 2, name: 'bułeczki bao' },
+                    { id: 3, name: 'zupa cebulowa' },
+                ]
             } />
         </Wrapper>
     );
