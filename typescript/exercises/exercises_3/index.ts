@@ -5,7 +5,21 @@
 Ćwiczenie:
   Uzupełnij treść poniższych funkcji wraz z ich typowaniem.
 */
-var peoples = [
+type User = {
+    name: string;
+    type: 'user';
+    languages: string[]
+}
+
+type Admin = {
+    name: string;
+    type: 'admin';
+    role: string
+}
+
+type Person = User | Admin;
+
+var peoples: Person[] = [
     {
         name: 'Jan',
         type: 'user',
@@ -17,13 +31,13 @@ var peoples = [
         role: 'security'
     },
 ];
-function isUser(person) {
+function isUser(person: Person): person is User {
     return person.type === 'user';
 }
-function isAdmin(person) {
+function isAdmin(person: Person): person is Admin {
     return person.type === 'admin';
 }
-function showIntro(person) {
+function showIntro(person: Person) {
     var additionalInformation = '';
     if (isUser(person)) {
         additionalInformation = person.languages.join(',');

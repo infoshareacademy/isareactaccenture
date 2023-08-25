@@ -4,7 +4,14 @@
 
 Uzupełnij treść poniższych funkcji wraz z ich typowaniem. Pamiętaj o zmianie typowań `unknown`.
 */
-var cars = [
+
+type Car = {
+    model: string,
+    brand: string,
+    year: number
+}
+
+var cars: Car[] = [
     {
         model: 'Q7',
         brand: 'Audi',
@@ -21,7 +28,7 @@ var cars = [
         year: 2018
     },
 ];
-function carsAfter2000(cars) {
+function carsAfter2000(cars: Car[]) {
     return cars.filter(function (car) { return car.year > 2000; });
 }
 var newCars = carsAfter2000(cars);

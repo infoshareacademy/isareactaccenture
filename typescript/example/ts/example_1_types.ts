@@ -1,14 +1,14 @@
 enum AccountType {
-  STUDENT = 'student',
-  PARENT = 'parent',
+    STUDENT = 'student',
+    PARENT = 'parent',
 }
 interface User {
-  firstName: string,
-  lastName: string,
-  accountType: AccountType,
+    firstName: number,
+    lastName: string,
+    accountType: AccountType,
 }
 
 export {
-  AccountType,
-  User,
+    AccountType,
+    User,
 };
