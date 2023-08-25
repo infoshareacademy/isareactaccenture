@@ -1,10 +1,9 @@
 
 import { Text } from '@fluentui/react';
-import { useContext } from 'react';
-import { LanguageContext } from '../App';
+import { useLanguageContext } from '../LanguageContext';
 
 export const Home = () => {
-    const language = useContext(LanguageContext);
+    const { language } = useLanguageContext();
 
     if (language === 'en') {
         return <Text variant="xxLarge">Welcome on our site!</Text>

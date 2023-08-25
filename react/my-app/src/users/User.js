@@ -1,9 +1,9 @@
 import { Link } from 'react-router-dom';
-import { useContext } from 'react';
-import { LanguageContext } from '../App';
+import { useLanguageContext } from '../LanguageContext';
+
 
 export const User = ({ user }) => {
-    const language = useContext(LanguageContext);
+    const { language } = useLanguageContext();
 
     return <li>
         <Link to={`/users/${user.id}`}>{user.name}</Link>

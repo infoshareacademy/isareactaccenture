@@ -1,4 +1,4 @@
-import { Suspense, lazy, createContext, useState } from 'react';
+import { Suspense, lazy } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { Navigation } from './Navigation';
 import { Wrapper } from './Wrapper';
@@ -12,21 +12,14 @@ import { Sign } from './sign/Sign';
 import { Home } from './home/Home';
 import { Spinner } from '@fluentui/react';
 import { UserDetails } from './users/UserDetails';
+import { LanguageContextProvider } from './LanguageContext';
 
-
-export const LanguageContext = createContext('pl');
 const LazyAboutMe = lazy(() => import('./about-me/AboutMe').then((module => ({ default: module.AboutMe }))));
 
 function App() {
-    const [lang, setLang] = useState('pl');
-
     return (
-        <LanguageContext.Provider value={lang}>
+        <LanguageContextProvider>
             <Navigation />
-            <div>
-                <button onClick={() => setLang('pl')}>PL</button>
-                <button onClick={() => setLang('en')}>EN</button>
-            </div>
             <Wrapper>
                 <Suspense fallback={<Spinner />}>
                     <Routes>
@@ -47,7 +40,7 @@ function App() {
                     </Routes>
                 </Suspense>
             </Wrapper>
-        </LanguageContext.Provider>
+        </LanguageContextProvider>
     );
 }
 
