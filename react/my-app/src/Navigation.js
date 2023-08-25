@@ -14,6 +14,7 @@ const links = [
     { to: '/games', label: "Games" },
     { to: '/forms', label: "Forms" },
     { to: '/users', label: "Users" },
+    { to: '/sign', label: "Sign" },
 ]
 
 export const Navigation = () => {

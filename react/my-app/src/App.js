@@ -8,6 +8,7 @@ import { MyBoostedForm } from './forms/MyBoostedForm';
 import { Game } from './game/Game';
 import { GameClass } from './game/GameClass';
 import { Users } from './users/Users';
+import { Sign } from './sign/Sign';
 import { Text } from '@fluentui/react';
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
                         <MyBoostedForm />
                     </>} />
                     <Route path="/users" element={<Users />} />
+                    <Route path="/sign" element={<Sign />} />
                 </Routes>
             </Wrapper>
         </>
