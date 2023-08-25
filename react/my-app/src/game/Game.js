@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { DefaultButton, PrimaryButton, FontIcon, Text } from '@fluentui/react';
 import styled from 'styled-components';
 
 const Score = styled.span`
@@ -23,11 +24,15 @@ export const Game = ({ name }) => {
     }, [points, name])
 
     return <>
-        <h1>Witaj w grzę {name}!</h1>
-        <h2>Twoja liczba punktów to: <Score isRed={points < 0}>{points}</Score>!</h2>
+        <Text variant="large">Witaj w grzę {name}!</Text>
+        <Text variant="mediumPlus">Twoja liczba punktów to: <Score isRed={points < 0}>{points}</Score>!</Text>
         <div>
-            <button onClick={increase}>+</button>
-            <button onClick={decrease}>-</button>
+            <PrimaryButton onClick={increase}>
+                <FontIcon iconName="Add" />
+            </PrimaryButton>
+            <DefaultButton onClick={decrease}>
+                <FontIcon iconName="Remove" />
+            </DefaultButton>
         </div>
     </>
 }
