@@ -1,31 +1,31 @@
 interface UserInterface {
-  name: string,
+    name: string,
 }
 
 type UserType = {
-  name: string,
+    name: string,
 }
 
 interface Student extends UserInterface {
-  surname: string,
-  age: number,
+    surname: string,
+    age: number,
 }
 
 interface Student2 extends UserType {
-  surname: string,
-  age: number,
+    surname: string,
+    age: number,
 }
 
 // Interface można rozszerzać jest on ze sobą łączony
 interface UserInterface {
-  country: 'PL' | 'GB',
+    country: 'PL' | 'GB',
 }
 
 const test: Student = {
-  name: 'Jan',
-  surname: 'Nowak',
-  age: 20,
-  country: 'PL',
+    name: 'Jan',
+    surname: 'Nowak',
+    age: 20,
+    country: 'PL',
 }
 
 // ❌ W przypadku typów nie ma takiej możliwości
@@ -36,22 +36,22 @@ const test: Student = {
 type Currency = 'PLN' | 'EUR';
 
 interface Payment {
-  amount: number,
-  currency: Currency,
+    amount: number,
+    currency: Currency,
 }
 
 
 const payment_1 = {
-  amount: 100,
-  currency: 'PLN',
+    amount: 100,
+    currency: 'PLN',
 }
 
 const payment_2: Payment = {
-  amount: 5000,
-  currency: 'EUR',
+    amount: 5000,
+    currency: 'EUR',
 }
 
 const payment_3: Payment = {
-  amount: 5000,
-  currency: 'USD' as Currency,
+    amount: 5000,
+    currency: 'USD' as Currency,
 }

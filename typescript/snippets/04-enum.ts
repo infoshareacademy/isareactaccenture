@@ -1,14 +1,14 @@
 enum AccountType {
-  Student,
-  Parent,
+    Student,
+    Parent,
 }
 
 enum Account {
-  Admin = 10,
-  User,
+    Admin = 10,
+    User,
 }
 
 enum Vehicles {
-  CAR = 'car',
-  BIKE = 'bike'
+    CAR = 'car',
+    BIKE = 'bike'
 }

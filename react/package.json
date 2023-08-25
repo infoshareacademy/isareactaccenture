@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "@fluentui/react": "^8.111.0",
+    "react-hook-form": "^7.45.4",
+    "react-router-dom": "^6.15.0",
+    "styled-components": "^6.0.7"
+  }
+}
