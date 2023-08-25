@@ -1,31 +1,32 @@
-import { PrimaryButton } from '@fluentui/react';
+import { PrimaryButton, DefaultButton } from '@fluentui/react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 const NavContainer = styled.div`
     display: flex;
     flex-direction: row;
     margin: 15px;
-`
+`;
+
+const links = [
+    { to: '/', label: "Home" },
+    { to: '/about-me', label: "About me" },
+    { to: '/games', label: "Games" },
+    { to: '/forms', label: "Forms" },
+    { to: '/users', label: "Users" },
+]
 
 export const Navigation = () => {
     return (
         <NavContainer>
-            <Link to="/">
-                <PrimaryButton text="Home" />
-            </Link>
-            <Link to="/about-me">
-                <PrimaryButton text="About me" />
-            </Link>
-            <Link to="/games">
-                <PrimaryButton text="Games" />
-            </Link>
-            <Link to="/forms">
-                <PrimaryButton text="Forms" />
-            </Link>
-            <Link to="/users">
-                <PrimaryButton text="Users" />
-            </Link>
+            {links.map((link) => (
+                <NavLink key={link.to} to={link.to}>
+                    {({ isActive }) => isActive
+                        ? <PrimaryButton text={link.label} />
+                        : <DefaultButton text={link.label} />
+                    }
+                </NavLink>
+            ))}
         </NavContainer>
     )
 }
