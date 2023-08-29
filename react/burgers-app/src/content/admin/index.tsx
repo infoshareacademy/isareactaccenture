@@ -2,19 +2,19 @@ import { PageWrapper } from "../../common/page-wrapper"
 import { useState, useEffect } from 'react'
 import { DetailsList, PrimaryButton, DefaultButton, SelectionMode  } from "@fluentui/react"
 import { Burger } from '../../common/types';
-import { getBurgers } from '../../services/burgers';
+import { deleteBurger, getBurgers } from '../../services/burgers';
 import { AddModalButton } from "./add-modal";
 
 const renderEditButton = () => <PrimaryButton>Edit</PrimaryButton>
-const renderDeleteButton = () => <DefaultButton>Delete</DefaultButton>
+const createRenderDeleteButton = (refresh: () => void) => (item: Burger) => {
+    const removeBurger = () => {
+        deleteBurger(item.id)
+            .then(() => refresh())
+    }
 
-const columns = [
-    { key: 'name', name: 'Name', fieldName: 'name', minWidth: 200 },
-    { key: 'ingredients', name: 'Ingredients', fieldName: 'ingredients', minWidth: 200 },
-    { key: 'price', name: 'Price', fieldName: 'price', minWidth: 100 },
-    { key: 'edit', name: 'Edit', minWidth: 100, onRender: renderEditButton  },
-    { key: 'delete', name: 'Delete', minWidth: 100, onRender: renderDeleteButton },
-];
+    return <DefaultButton onClick={removeBurger}>Delete</DefaultButton>
+}
+
 
 export const Admin = () => {
     const [burgers, setBurgers] = useState<Burger[]>([]);
@@ -23,6 +23,14 @@ export const Admin = () => {
         const data = await getBurgers()
         setBurgers(data);
     }
+
+    const columns = [
+        { key: 'name', name: 'Name', fieldName: 'name', minWidth: 200 },
+        { key: 'ingredients', name: 'Ingredients', fieldName: 'ingredients', minWidth: 200 },
+        { key: 'price', name: 'Price', fieldName: 'price', minWidth: 100 },
+        { key: 'edit', name: 'Edit', minWidth: 100, onRender: renderEditButton  },
+        { key: 'delete', name: 'Delete', minWidth: 100, onRender: createRenderDeleteButton(fetchBurgers) },
+    ]
 
     useEffect(() => {
         fetchBurgers();
