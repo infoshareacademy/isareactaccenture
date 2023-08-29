@@ -1,5 +1,8 @@
-import { Text } from '@fluentui/react';
+import { PageWrapper } from "../../common/page-wrapper"
 
 export const Home = () => {
-    return <Text variant='xLarge'>Welcome to our burger restaurant!</Text>
+    return (
+        <PageWrapper title="Welcome to our burger restaurant!">
+        </PageWrapper>
+    )
 }

@@ -1,5 +1,8 @@
-import { Text } from '@fluentui/react';
+import { PageWrapper } from "../../common/page-wrapper"
 
 export const Admin = () => {
-    return <Text variant='xLarge'>Admin!</Text>
+    return (
+        <PageWrapper title="Admin">
+        </PageWrapper>
+    )
 }
