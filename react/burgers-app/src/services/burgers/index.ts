@@ -22,3 +22,10 @@ export const getBurger = async (id: string): Promise<BurgerData> => {
 
     return data;
 }
+
+export const postBurger = async (data: BurgerData): Promise<Response> => {
+    return fetch(`https://rest-api-b6410.firebaseio.com/burgers.json`, {
+        method: 'POST',
+        body: JSON.stringify(data)
+    });
+}
