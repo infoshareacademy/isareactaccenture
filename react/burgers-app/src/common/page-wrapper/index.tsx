@@ -1,4 +1,4 @@
-import type { ReactNode, FC } from 'react';
+import type { ReactNode } from 'react';
 import styled from 'styled-components';
 import { Text } from '@fluentui/react';
 
@@ -9,12 +9,7 @@ const PageWrapperContainer = styled.div`
     margin: 15px;
 `;
 
-type Props = { 
-    children: ReactNode, 
-    title: string 
-}
-
-export const PageWrapper = ({ children, title }: Props) => (
+export const PageWrapper = ({ children, title }: { children: ReactNode, title: string }) => (
     <PageWrapperContainer>
         <Text variant="xxLarge">{title}</Text>
         {children}
