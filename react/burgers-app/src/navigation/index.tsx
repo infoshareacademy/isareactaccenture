@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { PrimaryButton } from '@fluentui/react';
+import { Link } from 'react-router-dom';
 
 const NavContainer = styled.div`
     display: flex;
@@ -17,7 +18,9 @@ const links = [
 export const Navigation  = () => {
     return <NavContainer>
         {links.map((link) => (
-            <PrimaryButton text={link.label} />
+            <Link key={link.to} to={link.to}>
+                <PrimaryButton  text={link.label} />
+            </Link>
         ))}
     </NavContainer>
 }
