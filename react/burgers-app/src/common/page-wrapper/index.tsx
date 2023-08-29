@@ -14,7 +14,7 @@ type Props = {
     title: string 
 }
 
-export const PageWrapper: FC<Props> = ({ children, title }) => (
+export const PageWrapper = ({ children, title }: Props) => (
     <PageWrapperContainer>
         <Text variant="xxLarge">{title}</Text>
         {children}
