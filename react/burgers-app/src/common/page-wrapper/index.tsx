@@ -7,11 +7,19 @@ const PageWrapperContainer = styled.div`
     flex-direction: column;
     align-items: center;
     margin: 15px;
+
+`;const TextContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 15px;
 `;
 
 export const PageWrapper = ({ children, title }: { children: ReactNode, title: string }) => (
     <PageWrapperContainer>
-        <Text variant="xxLarge">{title}</Text>
+        <TextContainer>
+            <Text variant="xxLarge">{title}</Text>
+        </TextContainer>
         {children}
     </PageWrapperContainer>
 )

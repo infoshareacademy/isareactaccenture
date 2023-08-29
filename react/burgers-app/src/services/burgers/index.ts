@@ -11,3 +11,14 @@ export const getBurgers = async (): Promise<Burger[]> => {
 
     return formattedData;
 }
+
+export const getBurger = async (id: string): Promise<BurgerData> => {
+    const response = await fetch(`https://rest-api-b6410.firebaseio.com/burgers/${id}.json`);
+    const data = await response.json();
+
+    if (!data) {
+        throw Error('The response was null')
+    }
+
+    return data;
+}

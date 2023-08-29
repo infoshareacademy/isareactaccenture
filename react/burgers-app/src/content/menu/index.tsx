@@ -3,9 +3,12 @@ import { DetailsList, SelectionMode  } from "@fluentui/react"
 import { PageWrapper } from "../../common/page-wrapper"
 import { Burger } from '../../common/types';
 import { getBurgers } from '../../services/burgers';
+import { Link } from 'react-router-dom';
+
+const renderNameColumn = (item: Burger) => <Link to={`/menu/${item.id}`}>{item.name}</Link>
 
 const columns = [
-    { key: 'name', name: 'Name', fieldName: 'name', minWidth: 200 },
+    { key: 'name', name: 'Name', fieldName: 'name', minWidth: 200, onRender: renderNameColumn },
     { key: 'ingredients', name: 'Ingredients', fieldName: 'ingredients', minWidth: 200 },
     { key: 'price', name: 'Price', fieldName: 'price', minWidth: 100 },
 ];
