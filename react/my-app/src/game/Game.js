@@ -3,7 +3,7 @@ import { DefaultButton, PrimaryButton, FontIcon, Text } from '@fluentui/react';
 import styled from 'styled-components';
 
 const Score = styled.span`
-    color: ${props => props.isRed ? 'red' : 'black'}
+    color: ${props => props.$isRed ? 'red' : 'black'}
 `;
 
 export const Game = ({ name }) => {
@@ -25,7 +25,7 @@ export const Game = ({ name }) => {
 
     return <>
         <Text variant="large">Witaj w grzę {name}!</Text>
-        <Text variant="mediumPlus">Twoja liczba punktów to: <Score isRed={points < 0}>{points}</Score>!</Text>
+        <Text variant="mediumPlus">Twoja liczba punktów to: <Score $isRed={points < 0}>{points}</Score>!</Text>
         <div>
             <PrimaryButton onClick={increase}>
                 <FontIcon iconName="Add" />
