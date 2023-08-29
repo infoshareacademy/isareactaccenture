@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react'
 import { DetailsList, SelectionMode  } from "@fluentui/react"
 import { PageWrapper } from "../../common/page-wrapper"
+import { Burger } from '../../common/types';
+import { getBurgers } from '../../services/burgers';
 
 const columns = [
     { key: 'name', name: 'Name', fieldName: 'name', minWidth: 200 },
@@ -9,15 +11,10 @@ const columns = [
 ];
 
 export const Menu = () => {
-    const [burgers, setBurgers] = useState<any>([]);
+    const [burgers, setBurgers] = useState<Burger[]>([]);
 
     useEffect(() => {
-        fetch('https://rest-api-b6410.firebaseio.com/burgers.json')
-            .then(r => r.json())
-            .then(data => {
-                const formattedData = Object.keys(data).map(key => ({ ...data[key], id: key }));
-                setBurgers(formattedData);
-            })
+        getBurgers().then(data => setBurgers(data));
     }, []);
 
     return (
