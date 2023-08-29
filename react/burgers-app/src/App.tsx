@@ -1,6 +1,8 @@
+import { Navigation } from './navigation';
+
 function App() {
   return (
-    <h1>Tu bedzie aplikacja :) </h1>
+    <Navigation />
   );
 }
 
