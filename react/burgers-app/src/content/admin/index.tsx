@@ -7,6 +7,7 @@ import { AddModalButton } from "./add-modal";
 import { createRenderEditButton } from "./edit-button";
 import { createRenderDeleteButton } from "./delete-button";
 import { createRenderColumn } from "./column";
+import { Auth } from "../../common/auth";
 
 export const Admin = () => {
     const [burgers, setBurgers] = useState<Burger[]>([]);
@@ -41,14 +42,16 @@ export const Admin = () => {
     }, []);
 
     return (
-        <PageWrapper title="Admin">
-            <DetailsList 
-                columns={columns}
-                items={burgers}
-                selectionMode={SelectionMode.none}
-                viewport={{ width: 500, height: 1000 }}
-            />
-            <AddModalButton refresh={fetchBurgers} />
-        </PageWrapper>
+        <Auth>
+            <PageWrapper title="Admin">
+                <DetailsList 
+                    columns={columns}
+                    items={burgers}
+                    selectionMode={SelectionMode.none}
+                    viewport={{ width: 500, height: 1000 }}
+                />
+                <AddModalButton refresh={fetchBurgers} />
+            </PageWrapper>
+        </Auth>
     )
 }

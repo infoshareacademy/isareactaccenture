@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 import { PrimaryButton } from '@fluentui/react';
 import { Link } from 'react-router-dom';
+import { useUserContext } from '../controllers/user-context';
+import { getAuth, signOut } from 'firebase/auth';
 
 const NavContainer = styled.div`
     display: flex;
@@ -21,24 +23,37 @@ const LogContainer = styled.div`
 `;
 
 const links = [
-    { to: '/', label: "Home" },
-    { to: '/menu', label: "Menu" },
-    { to: '/admin', label: "Admin" },
+    { to: '/', label: "Home", isAvailable: true },
+    { to: '/menu', label: "Menu", isAvailable: true },
+    { to: '/admin', label: "Admin", isAvailable: false },
 ]
 
 export const Navigation  = () => {
+    const user = useUserContext();
+
+    const handleSignOutClick = () => {
+        // --FIREBASE
+        const auth = getAuth();
+        signOut(auth);
+        // --FIREBASE
+    }
+
     return <NavContainer>
         <LinksContainer>
-            {links.map((link) => (
-                <Link key={link.to} to={link.to}>
+            {links.map((link) => link.isAvailable || (!link.isAvailable && user)
+                ? <Link key={link.to} to={link.to}>
                     <PrimaryButton  text={link.label} />
                 </Link>
-            ))}
+                : null
+            )}
         </LinksContainer>
         <LogContainer>
-            <Link to="/sign">
-                <PrimaryButton text="Sign in" />
-            </Link>
+            {user 
+                ? <PrimaryButton text="Sign out" onClick={handleSignOutClick} /> 
+                : <Link to="/sign">
+                      <PrimaryButton text="Sign in" />
+                  </Link>
+            }
         </LogContainer>
     </NavContainer>
 }
