@@ -1,40 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { createStore } from 'redux';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { BrowserRouter } from 'react-router-dom';
 
-const INCREMENT = 'INCREMENT';
-const DECREMENT = 'DECREMENT';
-const RESET = 'RESET';
-
-const counterReducer = (state: any = 0, action: any) => {
-    switch(action.type) {
-        case INCREMENT:
-            return state + 1
-        case DECREMENT:
-            return state - 1
-        case RESET:
-            return 0
-        default:
-            return state;
-    }
-}
-
-const createIncrementAction = () => {
-    return {
-        type: INCREMENT
-    }
-}
-const createDecrementAction = () => ({ type: DECREMENT })
-const createResetAction = () => ({ type: RESET })
-
-// @ts-expect-error
-const store = createStore(counterReducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
-
-// @ts-expect-error
-window.store = store;
+import '@fontsource/roboto/300.css';
+import '@fontsource/roboto/400.css';
+import '@fontsource/roboto/500.css';
+import '@fontsource/roboto/700.css';
 
 
 
@@ -43,7 +17,9 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
-    <App />
+    <BrowserRouter>
+        <App />
+    </BrowserRouter>
   </React.StrictMode>
 );
 
