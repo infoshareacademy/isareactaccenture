@@ -5,21 +5,32 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+const INCREMENT = 'INCREMENT';
+const DECREMENT = 'DECREMENT';
+const RESET = 'RESET';
+
 const counterReducer = (state: any = 0, action: any) => {
     switch(action.type) {
-        case 'INCREMENT':
+        case INCREMENT:
             return state + 1
-        case 'DECREMENT':
+        case DECREMENT:
             return state - 1
-        case 'RESET':
+        case RESET:
             return 0
         default:
             return state;
     }
 }
 
-const store = createStore(counterReducer);
+const createIncrementAction = () => {
+    return {
+        type: INCREMENT
+    }
+}
+const createDecrementAction = () => ({ type: DECREMENT })
+const createResetAction = () => ({ type: RESET })
 
+const store = createStore(counterReducer);
 
 // @ts-expect-error
 window.store = store;
