@@ -1,23 +1,19 @@
 import { PageWrapper } from "../../common/page-wrapper"
 import { useState, useEffect } from 'react'
-import { DetailsList, PrimaryButton, DefaultButton, SelectionMode  } from "@fluentui/react"
+import { DetailsList, SelectionMode  } from "@fluentui/react"
 import { Burger } from '../../common/types';
-import { deleteBurger, getBurgers } from '../../services/burgers';
+import { getBurgers } from '../../services/burgers';
 import { AddModalButton } from "./add-modal";
-
-const renderEditButton = () => <PrimaryButton>Edit</PrimaryButton>
-const createRenderDeleteButton = (refresh: () => void) => (item: Burger) => {
-    const removeBurger = () => {
-        deleteBurger(item.id)
-            .then(() => refresh())
-    }
-
-    return <DefaultButton onClick={removeBurger}>Delete</DefaultButton>
-}
-
+import { createRenderEditButton } from "./edit-button";
+import { createRenderDeleteButton } from "./delete-button";
+import { createRenderColumn } from "./column";
 
 export const Admin = () => {
     const [burgers, setBurgers] = useState<Burger[]>([]);
+    const [editId, setEditId] = useState<string | null>(null);
+
+    const enterEditMode = (id: string) => setEditId(id);
+    const cancelEditMode = () => setEditId(null);
 
     const fetchBurgers = async () => {
         const data = await getBurgers()
@@ -25,11 +21,16 @@ export const Admin = () => {
     }
 
     const columns = [
-        { key: 'name', name: 'Name', fieldName: 'name', minWidth: 200 },
-        { key: 'ingredients', name: 'Ingredients', fieldName: 'ingredients', minWidth: 200 },
-        { key: 'price', name: 'Price', fieldName: 'price', minWidth: 100 },
-        { key: 'edit', name: 'Edit', minWidth: 100, onRender: renderEditButton  },
-        { key: 'delete', name: 'Delete', minWidth: 100, onRender: createRenderDeleteButton(fetchBurgers) },
+        { key: 'name', name: 'Name', fieldName: 'name', minWidth: 200,
+            onRender: createRenderColumn(editId) },
+        { key: 'ingredients', name: 'Ingredients', fieldName: 'ingredients', minWidth: 200,
+            onRender: createRenderColumn(editId) },
+        { key: 'price', name: 'Price', fieldName: 'price', minWidth: 100,
+            onRender: createRenderColumn(editId) },
+        { key: 'edit', name: 'Edit', minWidth: 100, 
+            onRender: createRenderEditButton(enterEditMode, editId) },
+        { key: 'delete', name: 'Delete', minWidth: 100, 
+            onRender: createRenderDeleteButton(fetchBurgers, editId, cancelEditMode) },
     ]
 
     useEffect(() => {
