@@ -30,7 +30,8 @@ const createIncrementAction = () => {
 const createDecrementAction = () => ({ type: DECREMENT })
 const createResetAction = () => ({ type: RESET })
 
-const store = createStore(counterReducer);
+// @ts-expect-error
+const store = createStore(counterReducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 
 // @ts-expect-error
 window.store = store;
