@@ -35,3 +35,10 @@ export const deleteBurger = async (id: string): Promise<Response> => {
         method: 'DELETE'
     });
 }
+
+export const putBuger = async (id: string, data: BurgerData): Promise<Response> => {
+    return fetch(`https://rest-api-b6410.firebaseio.com/burgers/${id}.json`, {
+        method: 'PUT',
+        body: JSON.stringify(data)
+    });
+}

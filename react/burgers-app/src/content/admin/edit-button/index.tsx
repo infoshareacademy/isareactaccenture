@@ -1,18 +1,27 @@
 import { PrimaryButton, DefaultButton } from "@fluentui/react"
-import { Burger } from "../../../common/types"
-
+import { Burger, BurgerData } from "../../../common/types"
+import { putBuger } from "../../../services/burgers"
 
 export const createRenderEditButton = (
     enterEditMode: (id: string) => void,
-    editId: string | null
+    editId: string | null,
+    editFormData: BurgerData,
+    setEditFormData: (data: BurgerData) => void,
+    cancelEditMode: () => void,
+    refresh: () => void,
 ) => {
     return (item: Burger) => {
         const handleEditClick = () => {
-            enterEditMode(item.id)
+            enterEditMode(item.id);
+            const {id, ...rest} = item;
+            setEditFormData(rest);
         }
 
         const handleSaveClick = () => {
-            console.log('save')
+            putBuger(item.id, editFormData).then(() => {
+                cancelEditMode();
+                refresh();
+            })
         }
 
         if (editId === item.id) {
