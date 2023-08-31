@@ -31,5 +31,16 @@ export const Counter = () => {
                 <Icon>remove</Icon>
             </Button>
         </ButtonGroup>
+        <ButtonGroup sx={{ marginTop: '15px'}}>
+            <Button variant="contained" color="success" onClick={increment}>
+                <Icon>update</Icon>
+            </Button>
+            <Button variant="contained" color="info" onClick={reset}>
+                <Icon>hourglass_empty</Icon>
+            </Button>
+            <Button variant="contained" color="warning" onClick={decrement}>
+                <Icon>history</Icon>
+            </Button>
+        </ButtonGroup>
     </>
 }
