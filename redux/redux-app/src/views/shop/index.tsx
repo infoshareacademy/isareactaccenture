@@ -1,7 +1,6 @@
-import { Box, Button, Card, CardActions, CardContent, CardMedia, Typography } from "@mui/material";
-import { useSelector, useDispatch } from "react-redux";
-import { ShopProduct, createAddToCartAction, createRemoveFromCartAction } from "../../state/shop-cart";
-import { State } from "../../store";
+import { Box, Typography } from "@mui/material";
+import { ShopProduct } from "../../state/shop-cart";
+import { ShopItem } from "./shop-item";
 
 const shopProducts: ShopProduct[] = Array(100).fill(0).map((_, i) => ({
     id: i + 1,
@@ -13,48 +12,12 @@ const shopProducts: ShopProduct[] = Array(100).fill(0).map((_, i) => ({
 }))
 
 export const Shop = () => {
-    const productsInCart = useSelector((state: State) => state.shopCart);
-    const dispatch = useDispatch();
-
-    const handleAddToCartClick = (product: ShopProduct) => {
-        dispatch(createAddToCartAction(product))
-    }
-
-    const handleRemoveFromCartClick = (productId: number) => {
-        dispatch(createRemoveFromCartAction(productId))
-    }
-
-    const isProductInCart = (product: ShopProduct) => {
-        return productsInCart.map(p => p.id).includes(product.id);
-    }
-
     return <>
         <Typography variant="h2">Shop</Typography>
         <Box sx={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap'}}>
             {
                 shopProducts.map(product => (
-                    <Card sx={{ width: 'calc(25% - 30px)', margin: '15px' }}>
-                        <CardMedia
-                            sx={{ height: 140 }}
-                            image={product.url}
-                        />
-                        <CardContent>
-                            <Typography gutterBottom variant="h5" component="div">
-                                {product.name}
-                            </Typography>
-                            <Typography variant="body2" color="text.secondary">
-                                {product.price} $
-                            </Typography>
-                        </CardContent>
-                        <CardActions>
-                            {isProductInCart(product)
-                                ? <Button variant="contained" size="small" color="error" 
-                                    onClick={() => handleRemoveFromCartClick(product.id)}>Remove from cart</Button>
-                                : <Button variant="contained" size="small" 
-                                    onClick={() => handleAddToCartClick(product)}>Add to cart</Button>
-                            }
-                        </CardActions>
-                    </Card>
+                    <ShopItem product={product} />
                 ))
             }
         </Box>

@@ -1,12 +1,14 @@
 import { Button, Icon, Dialog, DialogTitle, DialogContent, List, ListItemButton, ListItem, ListItemAvatar, ListItemText, Avatar, Badge } from "@mui/material"
 import { useState } from "react"
 import { useSelector, useDispatch } from "react-redux";
-import { State } from "../../store";
 import { createRemoveFromCartAction } from "../../state/shop-cart";
+import { shopCartLengthSeletor, shopCartSeletor, totalValueSelector } from "../../state/shop-cart/selector";
 
-export const ShopCart = () => {
+export const ShopCart = ()=> {
     const [isOpen, setIsOpen] = useState(false);
-    const productsInCart = useSelector((state: State) => state.shopCart);
+    const productsInCart = useSelector(shopCartSeletor);
+    const productsCartLength = useSelector(shopCartLengthSeletor);
+    const totalValue = useSelector(totalValueSelector);
     const dispatch = useDispatch();
 
     const open = () => setIsOpen(true);
@@ -16,13 +18,9 @@ export const ShopCart = () => {
         dispatch(createRemoveFromCartAction(productId))
     }
 
-    const getTotalValue = () => {
-        return productsInCart.map(p => p.price).reduce((acc, curr) => acc + curr, 0)
-    }
-
     return <>
         <Button color="inherit" onClick={open}>
-            <Badge badgeContent={productsInCart.length} color="success">
+            <Badge badgeContent={productsCartLength} color="success">
                 <Icon>shopping_cart</Icon>
             </Badge>
         </Button>
@@ -44,7 +42,7 @@ export const ShopCart = () => {
                         ))
                     }
                     <ListItem disableGutters>
-                        <ListItemText primary={`Sum: ${getTotalValue()}$`} />
+                        <ListItemText primary={`Sum: ${totalValue}$`} />
                     </ListItem>
                 </List>
             </DialogContent>
