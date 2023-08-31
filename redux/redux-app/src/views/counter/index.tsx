@@ -1,9 +1,10 @@
 import { Button, ButtonGroup, Icon, Typography } from "@mui/material";
 import { useSelector, useDispatch } from "react-redux";
 import { createIncrementAction, createDecrementAction, createResetAction } from "../../state/counter";
+import { State } from "../../store";
 
 export const Counter = () => {
-    const value = useSelector((state: number) => state);
+    const value = useSelector((state: State) => state.counter);
     const dispatch = useDispatch();
 
     const increment = () => {
