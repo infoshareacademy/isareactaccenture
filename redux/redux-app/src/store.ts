@@ -1,15 +1,18 @@
 import { createStore, combineReducers } from "redux";
 import { counter } from "./state/counter";
 import { rentalOffice, Product } from "./state/rental-office";
+import { shopCart, ShopProduct } from "./state/shop-cart";
 
 export type State = {
     counter: number;
-    rentalOffice: Product[]
+    rentalOffice: Product[];
+    shopCart: ShopProduct[];
 }
 
 const reducers = combineReducers({
     counter,
-    rentalOffice
+    rentalOffice,
+    shopCart
 })
 
 export const store = createStore(reducers,
