@@ -12,12 +12,17 @@ const initialState: Counter = {
 }
 
 // ACTIONS
-const INCREMENT = 'INCREMENT';
-const DECREMENT = 'DECREMENT';
-const RESET = 'RESET';
-const START_LOADING = 'START_LOADING';
+export const INCREMENT = 'INCREMENT';
+export const DECREMENT = 'DECREMENT';
+export const RESET = 'RESET';
+export const START_LOADING = 'START_LOADING';
+export const SAGA_INCREMENT = 'SAGA_INCREMENT';
+export const SAGA_DECREMENT = 'SAGA_DECREMENT';
 
-type Action = { type: typeof INCREMENT | typeof DECREMENT | typeof RESET | typeof START_LOADING, payload?: number }
+type Action = {
+    type: typeof INCREMENT | typeof DECREMENT | typeof RESET
+    | typeof START_LOADING | typeof SAGA_DECREMENT | typeof SAGA_INCREMENT, payload?: number
+}
 
 // REDUCER
 export const counter = (state: Counter = initialState, action: Action): Counter => {
@@ -70,3 +75,5 @@ export const createAsyncResetAction = () => {
         setTimeout(() => dispatch(createResetAction()), 2000)
     }
 }
+export const createSagaIncrement = (): Action => ({ type: SAGA_INCREMENT })
+export const createSagaDecrement = (): Action => ({ type: SAGA_DECREMENT })

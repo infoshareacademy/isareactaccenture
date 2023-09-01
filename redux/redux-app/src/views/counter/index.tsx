@@ -1,7 +1,9 @@
 import { Button, ButtonGroup, Icon, Typography, CircularProgress } from "@mui/material";
 import { useSelector, useDispatch } from "react-redux";
 import { createIncrementAction, createDecrementAction, createResetAction, 
-    createAsyncIncrementAction, createAsyncResetAction, createAsyncDecrementAction } from "../../state/counter";
+    createAsyncIncrementAction, createAsyncResetAction, createAsyncDecrementAction,
+    createSagaIncrement, createSagaDecrement
+ } from "../../state/counter";
 import { State } from "../../store";
 
 export const Counter = () => {
@@ -14,6 +16,9 @@ export const Counter = () => {
     const asyncIncrement = () => {
         // @ts-expect-error
         dispatch(createAsyncIncrementAction())
+    }
+    const sagaIncrement = () => {
+        dispatch(createSagaIncrement())
     }
     const reset = () => {
         dispatch(createResetAction())
@@ -28,6 +33,9 @@ export const Counter = () => {
     const asyncDecrement = () => {
         // @ts-expect-error
         dispatch(createAsyncDecrementAction())
+    }
+    const sagaDecrement = () => {
+        dispatch(createSagaDecrement())
     }
 
     return <>
@@ -53,6 +61,14 @@ export const Counter = () => {
             </Button>
             <Button variant="contained" color="warning" onClick={asyncDecrement}>
                 <Icon>history</Icon>
+            </Button>
+        </ButtonGroup>
+        <ButtonGroup sx={{ marginTop: '15px'}}>
+            <Button variant="contained" color="info" onClick={sagaIncrement}>
+                <Icon>auto_stories</Icon>
+            </Button>
+            <Button variant="contained" color="error" onClick={sagaDecrement}>
+                <Icon>book</Icon>
             </Button>
         </ButtonGroup>
     </>
