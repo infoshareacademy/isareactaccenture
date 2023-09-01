@@ -2,7 +2,7 @@ import { Button, Icon, Paper, Table, TableBody, TableCell, TableContainer, Table
 import { useSelector, useDispatch } from "react-redux"
 import { useForm } from "react-hook-form"
 import { State } from "../../store"
-import { createAddAction, createRemoveAction, createRentAction, createReturnAction } from "../../state/rental-office"
+import { add, remove, rent, giveBack } from "../../state/rental-office/index-toolkit"
 
 export const RentalOffice = () => {
     const { register, handleSubmit } = useForm({
@@ -12,19 +12,19 @@ export const RentalOffice = () => {
     const dispatch = useDispatch();
 
     const onSubmit = ({ name }: { name: string }) => {
-        dispatch(createAddAction({ name, price: 10, isAvailable: true }))
+        dispatch(add({ name, price: 10, isAvailable: true }))
     }
 
     const handleRemoveClick = (productName: string) => {
-        dispatch(createRemoveAction(productName))
+        dispatch(remove(productName))
     }
 
     const handleRentClick = (productName: string) => {
-        dispatch(createRentAction(productName))
+        dispatch(rent(productName))
     }
 
     const handleReturnClick = (productName: string) => {
-        dispatch(createReturnAction(productName))
+        dispatch(giveBack(productName))
     }
 
     return (

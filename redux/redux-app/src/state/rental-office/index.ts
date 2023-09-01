@@ -33,10 +33,8 @@ export const rentalOffice = (state: Product[] = initialState, action: Action): P
         case REMOVE:
             return state.filter(product => product.name !== action.payload);
         case RENT:
-            return state.map(product => {
-                product.isAvailable = product.name === action.payload ? false : product.isAvailable
-                return product;
-            })
+            return state.map(product => product.name === action.payload
+                ? ({ ...product, isAvailable: false }) : product)
         case RETURN:
             return state.map(product => product.name === action.payload
                 ? ({ ...product, isAvailable: true }) : product)

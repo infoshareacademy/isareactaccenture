@@ -1,3 +1,5 @@
+import { AnyAction } from "redux";
+
 export type ShopProduct = {
     id: number,
     name: string,

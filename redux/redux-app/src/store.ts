@@ -1,7 +1,7 @@
-import { createStore, combineReducers, applyMiddleware, compose } from "redux";
-import thunk from 'redux-thunk';
+import { configureStore } from "@reduxjs/toolkit";
 import { counter, Counter } from "./state/counter";
-import { rentalOffice, Product } from "./state/rental-office";
+import { Product } from "./state/rental-office";
+import rentalOfficeReducer from "./state/rental-office/index-toolkit";
 import { shopCart, ShopProduct } from "./state/shop-cart";
 
 export type State = {
@@ -10,12 +10,11 @@ export type State = {
     shopCart: ShopProduct[];
 }
 
-const composeEnhancers = (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-
-const reducers = combineReducers({
-    counter,
-    rentalOffice,
-    shopCart
+export const store = configureStore({
+    reducer: {
+        counter,
+        rentalOffice: rentalOfficeReducer,
+        // @ts-expect-error
+        shopCart
+    }
 })
-
-export const store = createStore(reducers, composeEnhancers(applyMiddleware(thunk)));
