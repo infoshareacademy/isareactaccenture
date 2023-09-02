@@ -1,4 +1,4 @@
-import { AnyAction } from "redux";
+import { createReducer } from "@reduxjs/toolkit";
 
 export type ShopProduct = {
     id: number,
@@ -13,19 +13,18 @@ const REMOVE_FROM_CART = 'REMOVE_FROM_CART';
 
 type AddToCartAction = { type: typeof ADD_TO_CART, payload: ShopProduct };
 type RemoveFromCartAction = { type: typeof REMOVE_FROM_CART, payload: number };
-type Action = AddToCartAction | RemoveFromCartAction;
+export type Action = AddToCartAction | RemoveFromCartAction;
 
 // REDUCER
-export const shopCart = (state: ShopProduct[] = [], action: Action) => {
-    switch (action.type) {
-        case ADD_TO_CART:
+export const shopCart = createReducer<ShopProduct[]>([], (builder) => {
+    builder
+        .addCase('ADD_TO_CART', (state, action: AddToCartAction) => {
             return [...state, action.payload]
-        case REMOVE_FROM_CART:
+        })
+        .addCase('REMOVE_FROM_CART', (state, action: RemoveFromCartAction) => {
             return state.filter(product => product.id !== action.payload);
-        default:
-            return state;
-    }
-}
+        })
+});
 
 // ACTION CREATORS
 export const createAddToCartAction = (product: ShopProduct): AddToCartAction =>

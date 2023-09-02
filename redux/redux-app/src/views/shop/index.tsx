@@ -17,7 +17,7 @@ export const Shop = () => {
         <Box sx={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap'}}>
             {
                 shopProducts.map(product => (
-                    <ShopItem product={product} />
+                    <ShopItem key={product.id} product={product} />
                 ))
             }
         </Box>

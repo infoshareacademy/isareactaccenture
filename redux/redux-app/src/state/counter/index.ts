@@ -1,4 +1,4 @@
-import { Dispatch } from "redux";
+import { AppDispatch } from "../../store";
 
 export type Counter = {
     value: number,
@@ -19,7 +19,7 @@ export const START_LOADING = 'START_LOADING';
 export const SAGA_INCREMENT = 'SAGA_INCREMENT';
 export const SAGA_DECREMENT = 'SAGA_DECREMENT';
 
-type Action = {
+export type Action = {
     type: typeof INCREMENT | typeof DECREMENT | typeof RESET
     | typeof START_LOADING | typeof SAGA_DECREMENT | typeof SAGA_INCREMENT, payload?: number
 }
@@ -58,19 +58,19 @@ export const createDecrementAction = (value?: number): Action => ({ type: DECREM
 export const createResetAction = (): Action => ({ type: RESET })
 export const createStartLoadingAction = (): Action => ({ type: START_LOADING })
 export const createAsyncIncrementAction = () => {
-    return (dispatch: Dispatch) => {
+    return (dispatch: AppDispatch) => {
         dispatch(createStartLoadingAction());
         setTimeout(() => dispatch(createIncrementAction(5)), 2000)
     }
 }
 export const createAsyncDecrementAction = () => {
-    return (dispatch: Dispatch) => {
+    return (dispatch: AppDispatch) => {
         dispatch(createStartLoadingAction());
         setTimeout(() => dispatch(createDecrementAction(5)), 2000)
     }
 }
 export const createAsyncResetAction = () => {
-    return (dispatch: Dispatch) => {
+    return (dispatch: AppDispatch) => {
         dispatch(createStartLoadingAction());
         setTimeout(() => dispatch(createResetAction()), 2000)
     }

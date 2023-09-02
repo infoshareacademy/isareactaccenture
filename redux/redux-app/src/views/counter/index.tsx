@@ -1,20 +1,19 @@
 import { Button, ButtonGroup, Icon, Typography, CircularProgress } from "@mui/material";
-import { useSelector, useDispatch } from "react-redux";
 import { createIncrementAction, createDecrementAction, createResetAction, 
     createAsyncIncrementAction, createAsyncResetAction, createAsyncDecrementAction,
     createSagaIncrement, createSagaDecrement
  } from "../../state/counter";
 import { State } from "../../store";
+import { useAppDispatch, useAppSelector } from "../../hooks";
 
 export const Counter = () => {
-    const { value, isLoading } = useSelector((state: State) => state.counter);
-    const dispatch = useDispatch();
+    const { value, isLoading } = useAppSelector((state: State) => state.counter);
+    const dispatch = useAppDispatch();
 
     const increment = () => {
         dispatch(createIncrementAction())
     }
     const asyncIncrement = () => {
-        // @ts-expect-error
         dispatch(createAsyncIncrementAction())
     }
     const sagaIncrement = () => {
@@ -24,14 +23,12 @@ export const Counter = () => {
         dispatch(createResetAction())
     }
     const asyncReset = () => {
-        // @ts-expect-error
         dispatch(createAsyncResetAction())
     }
     const decrement = () => {
         dispatch(createDecrementAction())
     }
     const asyncDecrement = () => {
-        // @ts-expect-error
         dispatch(createAsyncDecrementAction())
     }
     const sagaDecrement = () => {
